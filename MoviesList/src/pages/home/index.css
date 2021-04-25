@@ -1,0 +1,9 @@
+
+.normal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-family: Georgia, sans-serif;
+    margin-top: 4em;
+}
+

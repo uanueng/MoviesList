@@ -1,0 +1,67 @@
+.card {
+    width: 240px;
+    height: 440px;
+    margin: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.img {
+    display: flex;
+    flex-direction: column;justify-content: flex-end;
+    width: 100%;
+    height: 330px;
+    background-color: black;
+    border-radius: 5px;
+}
+.stars {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 240px;
+    height: 30px;
+    padding: 2px 3px;
+    position: absolute;
+    border-radius: 5px;
+}
+.time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto 10px;
+    width: 60px;
+    height: 18px;
+    text-align: center;
+    font:14px/1.5 numFont,PingFangSC-Regular,Tahoma,Microsoft Yahei,sans-serif;
+    color: #ffffff;
+}
+.num {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 18px;
+    text-align: center;
+    font-size: 16px;
+    color: #ff613b;
+}
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 110px;
+    background-color: #d1ffd1;
+    border-radius: 5px;
+}
+.name {
+    margin: 10px 0 5px 10px;
+    font-size: 18px;
+
+}
+.brief {
+    width: 100%;
+}
