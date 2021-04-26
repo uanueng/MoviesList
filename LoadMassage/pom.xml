@@ -100,6 +100,19 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <!--填写主文件夹 -->
+                <directory>src/main/java</directory>
+                <includes>
+                    <!--使打包包含这2种配置文件 -->
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <!--不使用过滤器 -->
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

@@ -1,12 +1,17 @@
 package com.yxf.demo.controller;
 
 
+import com.yxf.demo.entity.Movie;
+import com.yxf.demo.service.RecommendService;
 import com.yxf.demo.util.GenericResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,12 +19,14 @@ import java.util.Map;
 @RequestMapping("recommend")
 public class RecommendController {
 
-    @RequestMapping("load")
-    public GenericResult loadMovies(@RequestBody List<Integer> list){
-        GenericResult<List<Map<String, Object>>> result = new GenericResult<>();
+    @Autowired
+    private RecommendService recommendService;
 
+    @RequestMapping("loadByIdList")
+    public GenericResult loadMovies(@RequestBody List<Integer> ids){
+        GenericResult<List<Movie>> result = new GenericResult<>();
         try {
-            List<Map<String, Object>> movies = new ArrayList<>();
+            List<Movie> movies = recommendService.loadByIdList(ids);
             result.setData(movies);
         }catch (Exception e){
             e.printStackTrace();

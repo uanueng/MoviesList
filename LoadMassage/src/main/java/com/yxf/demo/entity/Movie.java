@@ -6,6 +6,7 @@ public class Movie {
     private String brief;
     private String stars;
     private String imgPath;
+    private String time;
     private String type;
 
     public Integer getMovieId() {
@@ -54,5 +55,13 @@ public class Movie {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
