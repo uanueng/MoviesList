@@ -39,6 +39,18 @@
 .item {
     height: 60px;
 }
+.user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+.username {
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+}
 
 .content {
     width: 100%;

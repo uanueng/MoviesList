@@ -158,8 +158,13 @@ def train():
 def predict(id):
     global model, testRatings, testNegatives
     info = dict()
-    info['list'] = predictTopN(model, id, testNegatives, 10)
-    info['id'] = str(id)
+    info['id'] = id
+    try:
+        info['list'] = predictTopN(model, id, testNegatives, 10)
+        info['success'] = True
+    except Exception as e:
+        print(e)
+        info['success'] = False
     return jsonify(info)
 
 

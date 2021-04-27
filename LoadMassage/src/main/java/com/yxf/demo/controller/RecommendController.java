@@ -5,6 +5,7 @@ import com.yxf.demo.entity.Movie;
 import com.yxf.demo.service.RecommendService;
 import com.yxf.demo.util.GenericResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class RecommendController {
     @Autowired
     private RecommendService recommendService;
 
+    @CrossOrigin
     @RequestMapping("loadByIdList")
     public GenericResult loadMovies(@RequestBody List<Integer> ids){
         GenericResult<List<Movie>> result = new GenericResult<>();
