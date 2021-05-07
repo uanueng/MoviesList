@@ -11,8 +11,15 @@ from bs4 import BeautifulSoup
 import pymysql
 import random
 
-NUM = 0  # 电影数量
-url = "https://v.qq.com/x/list/movie"  # 爬取资源地址
+from pyasn1.compat.octets import null
+
+num = 0  # 电影数量
+offSet = 0
+prefix = "https://v.qq.com/x/bu/pagesheet/list?_all=1&append=1&channel=movie&listpage=2&offset="
+suffix = "&pagesize=30&sort=18"
+# 爬取地址
+# 爬取页面采用上拉动态加载，因此拼装url
+# url = prefix + str(offSet) + suffix
 
 
 def connectDB():
@@ -90,20 +97,36 @@ def closeDB(db):
 
 
 def getMovieList():
+    global num
+    global prefix
+    global offSet
+    global suffix
     db = connectDB()
-    response = requests.get(url)
-    html = response.content.decode("utf-8")
-    soup = BeautifulSoup(html, 'lxml')
-    moviesList = soup.find('div', class_='mod_figure mod_figure_v_default mod_figure_list_box')
-    for item in moviesList.find_all('div', class_='list_item'):
-        all_a_tag = item.find_all('a')
-        movie_name = all_a_tag[1].text
-        img_path = "https:" + item.find('img', class_='figure_pic')['src'].replace(':', '\:')
-        brief = item.find('div', class_='figure_desc').text
-        score = item.find('div', class_='figure_score').text
-        time = item.find('div', class_='figure_caption').text
-        type_id = random.randint(0, 9)
-        insertMovie(db, movie_name, img_path, time, brief, score, type_id)
+    while num < 3000:
+        url = prefix + str(offSet) + suffix
+        print(url)
+        response = requests.get(url)
+        html = response.content.decode("utf-8")
+        soup = BeautifulSoup(html, 'lxml')
+        moviesList = soup.find_all('div', class_='list_item')
+        for item in moviesList:
+            all_a_tag = item.find_all('a')
+            movie_name = all_a_tag[1].text
+            img_path = "https:" + item.find('img', class_='figure_pic')['src'].replace(':', '\:')
+            if item.find('div', class_='figure_desc'):
+                brief = item.find('div', class_='figure_desc').text
+            else:
+                brief = ""
+            if item.find('div', class_='figure_score'):
+                score = item.find('div', class_='figure_score').text
+            else:
+                score = 0
+            time = item.find('div', class_='figure_caption').text
+            type_id = random.randint(0, 9)
+            print("%s, %d" % (movie_name, num))
+            # insertMovie(db, movie_name, img_path, time, brief, score, type_id)
+            num += 1
+        offSet += 30
     closeDB(db)
 
 

@@ -46,12 +46,12 @@ class BasicLayout extends React.Component {
         const t = this;
         dispatch({
             type: 'homePageManage/getUserName',
-            payload: id,
+            payload: id+1,
             callback: data => {
                 if (data.success){
                     console.log(data);
                     this.setState({
-                        id:this.state.id+1,
+                        id:this.state.id,
                         username:data.username
                     })
                     t.loadMovieList()

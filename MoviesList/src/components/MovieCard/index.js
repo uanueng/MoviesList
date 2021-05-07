@@ -14,7 +14,7 @@ class Index extends React.Component {
                 </div>
                 <div className={styles.message}>
                     <div className={styles.name}>我们的父辈</div>
-                    <div className={styles.brief}>111</div>
+                    <div className={styles.brief}>1941年，德军准备入侵苏联，德国男青年Wilhelm和他的弟弟Friedhelm</div>
                 </div>
             </div>
         );
