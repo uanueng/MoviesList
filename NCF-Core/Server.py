@@ -5,11 +5,13 @@ from time import time
 import numpy as np
 from flask import Flask, jsonify
 from flask_apscheduler import APScheduler
+from flask_cors import *
 from tensorflow.keras import optimizers
 from Dataset import Dataset
 from NeuMF import NeuMF
 
 app = Flask(__name__)
+CORS(app, susupports_credentials=True)
 scheduler = APScheduler(5)
 
 
@@ -160,7 +162,7 @@ def predict(id):
     info = dict()
     info['id'] = id
     try:
-        info['list'] = predictTopN(model, id, testNegatives, 10)
+        info['list'] = predictTopN(model, id, testNegatives, 12)
         info['success'] = True
     except Exception as e:
         print(e)

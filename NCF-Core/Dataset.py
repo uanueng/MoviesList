@@ -6,11 +6,11 @@ import scipy.sparse as sp
 class Dataset(object):
 
     def __init__(self, path):
-        print("---")
+        print("---load   train  maxtrix---")
         self.trainMatrix = self.load_rating_file_as_matrix(path + ".train.rating")
-        print("---")
+        print("---load   text   maxtrix---")
         self.testRatings = self.load_rating_file_as_list(path + ".test.rating")
-        print("---")
+        print("---load negative maxtrix---")
         self.testNegatives = self.load_negative_file(path + ".test.negative")
         assert len(self.testRatings) == len(self.testNegatives)
 

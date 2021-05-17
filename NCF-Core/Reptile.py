@@ -13,7 +13,9 @@ import random
 
 from pyasn1.compat.octets import null
 
-num = 0  # 电影数量
+UserNUM = 0
+ItemNUM = 0
+items = 0  # 电影数量
 offSet = 0
 prefix = "https://v.qq.com/x/bu/pagesheet/list?_all=1&append=1&channel=movie&listpage=2&offset="
 suffix = "&pagesize=30&sort=18"
@@ -77,10 +79,11 @@ def random_name():
 
 
 def insertUsers():
+    global UserNUM
     db = connectDB()
     cursor = db.cursor()
     try:
-        for i in range(7000):
+        for i in range(UserNUM):
             name = random_name()
             sql = "INSERT INTO user(user_name) VALUES ('%s')" % (name)
             print(sql)
@@ -97,12 +100,13 @@ def closeDB(db):
 
 
 def getMovieList():
-    global num
+    global items
     global prefix
     global offSet
     global suffix
+    global ItemNUM
     db = connectDB()
-    while num < 3000:
+    while items < ItemNUM:
         url = prefix + str(offSet) + suffix
         print(url)
         response = requests.get(url)
@@ -123,15 +127,32 @@ def getMovieList():
                 score = 0
             time = item.find('div', class_='figure_caption').text
             type_id = random.randint(0, 9)
-            print("%s, %d" % (movie_name, num))
-            # insertMovie(db, movie_name, img_path, time, brief, score, type_id)
-            num += 1
+            print("%s, %d" % (movie_name, items))
+            insertMovie(db, movie_name, img_path, time, brief, score, type_id)
+            items += 1
         offSet += 30
     closeDB(db)
 
 
+def getConfigNum():
+    global UserNUM
+    global ItemNUM
+    db = connectDB()
+    cursor = db.cursor()
+    sql = "SELECT USERS, ITEMS FROM CONFIGURE"
+    try:
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        for item in result:
+            UserNUM = item[0]
+            ItemNUM = item[1]
+    except Exception as e:
+        print(e)
+
+
 if __name__ == '__main__':
+    getConfigNum()
     # 爬取电影数据
     getMovieList()
     # 制造用户信息
-    # insertUsers()
+    insertUsers()

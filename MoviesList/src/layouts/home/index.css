@@ -47,15 +47,30 @@
     padding: 0 5px;
 }
 .username {
+    width: 120px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
-    font-size: 18px;
-    font-style: italic;
+    font-size: 15px;
+    font-family: 'SimHei';
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    right: 50px;
+}
+.changebtn {
+    width: 100px;
+    position: relative;
+    right: 30px;
 }
 
 .content {
     width: 100%;
     min-height: 800px;
-    padding: 0 15vw 0 15vw;
+    padding: 0 8vw 0 8vw;
     margin: 2vh 0 2vh 0;
     background-color: #efefef;
 }
